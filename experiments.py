@@ -249,6 +249,7 @@ for config_id, config in enumerate(schedule):
             # collect local variables from all towers
             log_z_given_y_phi = tf.concat(tower_r_nk, axis=0)
             x_samples = tf.concat(tower_x_samps, axis=0)
+            print("here")
 
             # update GMM on param_device
             with tf.name_scope('GMM_update'):
@@ -483,3 +484,5 @@ for config_id, config in enumerate(schedule):
     except Exception as e:
         print('Crashed for config: \n%s' % str(config))
         print(e)
+
+# export LD_LIBRARY_PATH="/usr/local/cuda-9.0/lib64:/usr/local/cuda-9.0/extras/CUPTI/lib64"
