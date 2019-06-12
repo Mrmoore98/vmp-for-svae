@@ -22,7 +22,7 @@ from helpers.tf_utils import variable_on_device
 
 
 # global settings
-path_dataset = '../datasets'
+path_dataset = './datasets'
 ratio_tr = 0.7
 ratio_val = None
 size_minibatch = 64
@@ -47,7 +47,7 @@ nb_threads = 2  # for input queue
 
 stddev_init_nn = 0.01  # neural net initialization
 
-log_dir = 'logs_svae'
+log_dir = './logs_svae'
 
 verbose = False  # log device placement
 
@@ -102,7 +102,7 @@ for config_id, config in enumerate(schedule):
 
     try:
         print("Experiment %d with config\n%s\n" % (config_id, str(config)))
-
+        
         # reset Tensorflow graph
         with tf.Graph().as_default(), tf.device(param_device):
 
@@ -121,7 +121,7 @@ for config_id, config in enumerate(schedule):
                                                         binarise=binarise_data, seed_minibatch=config['seed'],
                                                         dtype=tf.float32, noise_level=noise_level)
 
-
+            print("here")
             # for error computation we need images in [0, 1] instead of {-1, 1}
             y_tr_01 = tf.concat(y_tr, axis=0)
             y_te_01 = y_te

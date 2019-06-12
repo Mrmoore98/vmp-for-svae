@@ -329,7 +329,7 @@ def unpack_recognition_gmm_debug(phi_gmm, name='unpack_phi2'):
 
         # make sure that L is a valid Cholesky decomposition and compute covariance
         with tf.name_scope('compute_prec'):
-            L_k = tf.contrib.linalg.LinearOperatorTriL(L_k_raw, name='to_triL').to_dense()
+            L_k = tf.linalg.LinearOperatorLowerTriangular(L_k_raw, name='to_triL').to_dense()
             L_k = tf.matrix_set_diag(L_k, tf.nn.softplus(tf.matrix_diag_part(L_k), name='softplus_diag'), name='L')
             P = tf.matmul(L_k, tf.matrix_transpose(L_k), name='precision')
 
@@ -346,7 +346,7 @@ def unpack_recognition_gmm(phi_gmm, name='unpack_phi2'):
 
         # make sure that L is a valid Cholesky decomposition and compute precision
         with tf.name_scope('compute_prec'):
-            L_k = tf.contrib.linalg.LinearOperatorTriL(L_k_raw, name='to_triL').to_dense()
+            L_k = tf.linalg.LinearOperatorLowerTriangular(L_k_raw, name='to_triL').to_dense()
             L_k = tf.matrix_set_diag(L_k, tf.nn.softplus(tf.matrix_diag_part(L_k), name='softplus_diag'), name='L')
             P = tf.matmul(L_k, tf.matrix_transpose(L_k), name='precision')
 
@@ -366,7 +366,7 @@ def unpack_smm(theta_smm, name='unpack_theta_smm'):
 
         # make sure that L is a valid Cholesky decomposition and compute scaling matrix
         with tf.name_scope('compute_prec'):
-            L_k = tf.contrib.linalg.LinearOperatorTriL(L_k_raw, name='to_triL').to_dense()
+            L_k = tf.linalg.LinearOperatorLowerTriangular(L_k_raw, name='to_triL').to_dense()
             L_k = tf.matrix_set_diag(L_k, tf.nn.softplus(tf.matrix_diag_part(L_k), name='softplus_diag'), name='L')
             Sigma = tf.matmul(L_k, tf.matrix_transpose(L_k), name='precision')
 
