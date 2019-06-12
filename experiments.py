@@ -47,7 +47,7 @@ nb_threads = 2  # for input queue
 
 stddev_init_nn = 0.01  # neural net initialization
 
-log_dir = './logs_svae'"""  """
+log_dir = 'logs_svae'
 
 verbose = False  # log device placement
 
