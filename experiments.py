@@ -32,7 +32,7 @@ nb_samples = 10  # nb samples for gradient computation
 nb_samples_te = 100  # 100 for small datasets; 20 for mnist on laptop (OOM otherwise)
 nb_samples_pert = 20  # how many perturbed samples to be generated per test data point (for missing data imputation)
 ratio_missing_data = 0.1
-
+#修改
 nb_iters = 20000
 measurement_freq = 500
 plot_freq = 2500
@@ -47,7 +47,7 @@ nb_threads = 2  # for input queue
 
 stddev_init_nn = 0.01  # neural net initialization
 
-log_dir = './logs_svae'
+log_dir = './logs_svae'"""  """
 
 verbose = False  # log device placement
 
