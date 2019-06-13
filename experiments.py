@@ -72,11 +72,7 @@ schedule = create_schedule({
     'lr': arg.lr,    # adam stepsize
     'lrcvi': [0.2],    # cvi stepsize (convex combination)
     'decay_rate': [0.95],  # decreasing cvi stepsize
-<<<<<<< HEAD
     'K': arg.K,           # nb components
-=======
-    'K': 20,           # nb components
->>>>>>> b3bb501795cc5aec179c0b891e46d99855b3df67
     'L': [6],          # latent dimensionality
     'U': 50,           # hidden units
     'seed': 0
