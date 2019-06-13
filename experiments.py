@@ -12,6 +12,8 @@ import os
 import tensorflow as tf
 import time
 
+import argparse
+
 from data import make_minibatch
 from distributions import dirichlet, gaussian, niw
 from helpers.logging_utils import generate_log_id
@@ -46,7 +48,7 @@ nb_gpu = 1  # number of GPUs to be used
 param_device = '/gpu:0'  # where parameters are stored
 meas_device = '/gpu:0'   # where performance is evaluated
 
-nb_threads = 2  # for input queue
+nb_threads = 1  # for input queue
 
 stddev_init_nn = 0.01  # neural net initialization
 
@@ -54,18 +56,29 @@ log_dir = 'logs_svae'
 
 verbose = False  # log device placement
 
+#Initial Argument
+parser = argparse.ArgumentParser(description='SVAE_Training')
+parser.add_argument('--nb-threads',default = 1, type = int, help= 'Number of Threads')
+parser.add_argument('-K',default = 20, type = int, help= 'Number of Component')
+parser.add_argument('--method', '-m',default = 'svae-cvi', type = str, help= 'Method')
+parser.add_argument('--lr', '-l', default = [0.0003], type = list, help= 'Learning Rate')
+
+arg = parser.parse_args()
+
 # set size_minibatch=64
 schedule = create_schedule({
     'dataset': 'auto',
-    'method': 'svae-cvi',
-    'lr': [0.0003],    # adam stepsize
+    'method': arg.method,
+    'lr': arg.lr,    # adam stepsize
     'lrcvi': [0.2],    # cvi stepsize (convex combination)
     'decay_rate': [0.95],  # decreasing cvi stepsize
-    'K': 10,           # nb components
+    'K': arg.K,           # nb components
     'L': [6],          # latent dimensionality
     'U': 50,           # hidden units
     'seed': 0
 })
+
+
 
 # set size_minibatch=100 (as in Johnson+, 2016); initialize phi_gmm with gmm_prior (line 181)
 # schedule = create_schedule({
